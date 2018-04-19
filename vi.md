@@ -25,9 +25,9 @@ fi
 
 Mặc dù tôi đã đề cập đến điều này trước đây, tôi vẫn phải nhắc lại rằng: Nếu bạn muốn sử dụng các tính năng của Git một cách đầy đủ, bạn nên chuyển sang sử dụng giao diện trên command line.
 
-## 2. Loại bỏ các file trong Git
+## 2. Bỏ qua các file trong Git
 
-Bạn có cảm thấy mệt mỏi khi các file biên dịch (như ```.pyc```) xuất hiện trong repository Git của bạn? Hay bạn cảm thấy chán ngấy rằng bạn đã thêm chúng vào Git? Không cần nhìn đâu xa, có một cách mà qua đó bạn có thể bảo Git loại bỏ những file cũng như các thư mục mà ta mong muốn. Chỉ cần đơn giản tạo 1 file với tên ```.gitignore``` và liệt kệ các file và thử mục bạn không muốn Git theo dõi. Bạn có thể tạo những ngoại lệ bằng cách sử dung dấu chấm than (!).
+Bạn có cảm thấy mệt mỏi khi các file biên dịch (như ```.pyc```) xuất hiện trong repository Git của bạn? Hay bạn cảm thấy chán ngấy rằng bạn đã thêm chúng vào Git? Không cần nhìn đâu xa, có một cách mà qua đó bạn có thể bảo Git bỏ qua những file cũng như các thư mục mà ta mong muốn. Chỉ cần đơn giản tạo 1 file với tên ```.gitignore``` và liệt kệ các file và thử mục bạn không muốn Git theo dõi. Bạn có thể tạo những ngoại lệ bằng cách sử dung dấu chấm than (!).
 
 ```
 *.pyc
@@ -66,7 +66,7 @@ Ví dụ khi kết hợp các lựa chọn:
 
 Ví dụ bạn đã commit cái gì đó mà bạn không muốn và cuối cùng bạn thực hiện việc hard reset để quay trở lại trạng thái trước đó. Sau đó, bạn nhận ra bạn đã bỏ sót vài thông tin khác trong tiến trình và muốn lấy nó lại, hay ít nhất là xem nó. Đây là lúc ```git reflog``` có thể giúp bạn.
 
-```git log``` cho bạn biết về commit gần nhất, cha của nó, cha của cha nó,... Tuy nhiên, ```git reflog``` là một danh sách các commit mà head đã trỏ tới. Hãy nhớ rằng nó cục bộ với hệ thống của bạn, nó không phải là một phần của repository của bạn và không được bao gồm trong push hay merge.
+```git log``` cho bạn biết về commit gần nhất, cha của nó, cha của cha nó,... Tuy nhiên, ```git reflog``` là một danh sách các commit mà head đã trỏ tới. Hãy nhớ rằng nó là hệ thống cục bộ của bạn, nó không phải là một phần của repository của bạn và không được bao gồm trong push hay merge.
 
 Nếu tôi chạy ```git log```, tôi sẽ lấy được các commit là một phần của repository của tôi:
 
@@ -109,21 +109,21 @@ Như bạn có thể thấy, chúng ta đã thêm dòng đầu và dòng thử b
 
 ![](https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/06/1402946454git-ninja-09.png)
 
-## 7. Ép nhiều commit
+## 7. Nén nhiều commit
 
-Khi bạn gửi code của bạn để được xem xét lại và tạo một pull request(điều thường xảy ra trong các dự án mã nguồn mở), bạn có thể sẽ phải yêu cầu tạo ra một sự thay đổi trong code của bạn trước khi nó được chấp nhận. Bạn tạo ra sự thay đổi, chỉ khi được yêu cầu và thực hiện lần nữa trong lần xem xét lại tiếp theo. Trước khi bạn biết nó, bạn có vài commit thêm. Lý tưởng nhất là bạn có thể ép chúng lại làm một và sử dụng câu lệnh ```rebase```.
+Khi bạn gửi code của bạn để được xem xét lại và tạo một pull request(điều thường xảy ra trong các dự án mã nguồn mở), bạn có thể sẽ phải yêu cầu tạo ra một sự thay đổi trong code của bạn trước khi nó được chấp nhận. Bạn tạo ra sự thay đổi, chỉ khi được yêu cầu và thực hiện lần nữa trong lần xem xét lại tiếp theo. Trước khi bạn biết nó, bạn có thêm vài commit . Lý tưởng nhất là bạn có thể ép chúng lại làm một và sử dụng câu lệnh ```rebase```.
 
 ```
 git rebase -i HEAD~[number_of_commits]
 ```
 
-Nếu bạn muốn ép hai commit cuối, câu lệnh bạn chạy như sau:
+Nếu bạn muốn nén hai commit cuối, câu lệnh bạn chạy như sau:
 
 ```
 git rebase -i HEAD~2
 ```
 
-Khi chạy câu lệnh này, bạn sẽ được dẫn tới một giao diện tương tác nơi liệt kê các commit và sẽ hỏi bạn chọn cái nào để ép. Lý tưởng nhất là bạn ``` chọn ``` commit cuối cùng và ``` ép ``` với các cái cũ.
+Khi chạy câu lệnh này, bạn sẽ được dẫn tới một giao diện tương tác nơi liệt kê các commit và sẽ hỏi bạn chọn cái nào để ép. Lý tưởng nhất là bạn ``` chọn ``` commit cuối cùng và ``` nén ``` với các cái cũ.
 
 ![](https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/06/1402946455git-ninja-10.png)
 
@@ -177,7 +177,7 @@ git fsck --lost-found
 
 ## 10. Cherry Pick
 
-Cuối cùng là câu lệnh Git tinh tế nhất. Câu lệnh ```cherry-pick``` là câu lệnh Git ưa thích nhất của tôi, bởi vì ý nghĩa thực tế cũng như tính hữu dụng của nó!
+Cuối cùng là câu lệnh Git tinh tế nhất. Câu lệnh ```cherry-pick``` là câu lệnh Git ưa thích nhất của tôi, bởi vì nghĩa đen cũng như tính hữu dụng của nó!
 
 Đơn gỉan ```cherry-pick``` sẽ chọn một commit đơn lẻ từ các nhánh khác nhau và hợp chúng với cái hiện tại. Nếu bạn đang làm việc theo cách song song trên hai nhánh hoặc nhiều hơn, bạn có thể thấy một lỗi mà xuất hiện ở tất cả các nhánh. Nếu bạn giải quyết nó trong một nhánh, bạn có thể cherry pick commit đến các nhánh khác, mà không làm ảnh hưởng tới với các file hay commit khác.
 
